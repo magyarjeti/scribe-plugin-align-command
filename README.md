@@ -1,0 +1,2 @@
+scribe-plugin-align-command
+===========================
