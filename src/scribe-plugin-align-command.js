@@ -17,7 +17,9 @@ export default function(align) {
                 return Element.isBlockElement(node);
             }.bind(this));
 
-            parentNode.style.textAlign = align;
+            scribe.transactionManager.run(function () {
+                parentNode.style.textAlign = align;
+            }.bind(this));
         };
 
         alignCommand.queryState = function() {
