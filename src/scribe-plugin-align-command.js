@@ -14,12 +14,15 @@ export default function(align) {
             var range = selection.range;
 
             var parentNode = selection.getContaining(function(node) {
-                return Element.isBlockElement(node);
+                return Element.isBlockElement(node) && scribe.el.contains(node);
             }.bind(this));
 
-            scribe.transactionManager.run(function () {
-                parentNode.style.textAlign = align;
-            }.bind(this));
+
+            if (!!parentNode) {
+                scribe.transactionManager.run(function () {
+                    parentNode.style.textAlign = align;
+                }.bind(this));
+            }
         };
 
         alignCommand.queryState = function() {
