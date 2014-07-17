@@ -18,19 +18,25 @@ define("scribe-plugin-align-command",
                 var range = selection.range;
 
                 var parentNode = selection.getContaining(function(node) {
-                    return Element.isBlockElement(node);
+                    return Element.isBlockElement(node) && scribe.el.contains(node);
                 }.bind(this));
 
-                parentNode.style.textAlign = align;
+
+                if (!!parentNode) {
+                    scribe.transactionManager.run(function () {
+                        parentNode.style.textAlign = align;
+                    }.bind(this));
+                }
             };
 
             alignCommand.queryState = function() {
                 var selection = new scribe.api.Selection();
                 var parentNode = selection.getContaining(function(node) {
-                    return Element.isBlockElement(node);
+                    return Element.isBlockElement(node) && scribe.el.contains(node);
                 }.bind(this));
 
-                return !!parentNode && parentNode.style.textAlign === align;
+                var textAlign = !!parentNode ? (parentNode.style.textAlign || 'left') : undefined;
+                return textAlign === align;
             };
 
             scribe.commands[commandName] = alignCommand;
