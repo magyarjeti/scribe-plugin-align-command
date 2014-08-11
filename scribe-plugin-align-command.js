@@ -1,5 +1,5 @@
 define("scribe-plugin-align-command",
-  ["scribe-common/element","exports"],
+  ["scribe-common/src/element","exports"],
   function(__dependency1__, __exports__) {
     "use strict";
     var Element = __dependency1__;
