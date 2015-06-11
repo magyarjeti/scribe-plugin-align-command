@@ -1,4 +1,4 @@
-module Element from 'scribe-common/src/element';
+module Element from 'element';
 
 export default function(align) {
     return function(scribe) {
