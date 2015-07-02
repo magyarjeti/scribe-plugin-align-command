@@ -1,5 +1,3 @@
-module Element from 'element';
-
 export default function(align) {
     return function(scribe) {
         var capitaliseFirstLetter = function(string) {
@@ -11,10 +9,9 @@ export default function(align) {
 
         alignCommand.execute = function() {
             var selection = new scribe.api.Selection();
-            var range = selection.range;
 
             var parentNode = selection.getContaining(function(node) {
-                return Element.isBlockElement(node) && scribe.el.contains(node);
+                return scribe.node.isBlockElement(node) && scribe.el.contains(node);
             }.bind(this));
 
 
@@ -28,7 +25,7 @@ export default function(align) {
         alignCommand.queryState = function() {
             var selection = new scribe.api.Selection();
             var parentNode = selection.getContaining(function(node) {
-                return Element.isBlockElement(node) && scribe.el.contains(node);
+                return scribe.node.isBlockElement(node) && scribe.el.contains(node);
             }.bind(this));
 
             var textAlign = !!parentNode ? (parentNode.style.textAlign || 'left') : undefined;
